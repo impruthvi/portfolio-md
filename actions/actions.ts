@@ -20,9 +20,9 @@ export async function sendEmail(data: ContactFormInputs) {
   try {
     const { name, email, message } = result.data
     const { data, error } = await resend.emails.send({
-      from: 'ailearning.click',
+      from: 'contact@ailearning.click',
       to: [email],
-      cc: ['ailearning.click'],
+      cc: ['contact@ailearning.click'],
       subject: 'Contact form submission',
       text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
       react: ContactFormEmail({ name, email, message })
@@ -34,6 +34,8 @@ export async function sendEmail(data: ContactFormInputs) {
 
     return { success: true }
   } catch (error) {
+    console.log(`Error: ${error}`);
+    
     return { error }
   }
 }
