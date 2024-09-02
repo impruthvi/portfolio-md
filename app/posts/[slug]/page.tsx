@@ -1,4 +1,4 @@
-import { getPostBySlug } from '@/actions/posts'
+import { getPostBySlug, getPosts } from '@/actions/posts'
 import MDXContent from '@/components/mdx-content'
 import { formatDate } from '@/lib/utils'
 import { ArrowLeftIcon } from 'lucide-react'
@@ -12,6 +12,13 @@ type Props = {
   params: {
     slug: string
   }
+}
+
+export async function generateStaticParams() {
+  const posts = await getPosts()
+  const slugs = posts.map(post => ({ slug: post.slug }))
+
+  return slugs
 }
 
 const Post = async ({ params: { slug } }: Props) => {
