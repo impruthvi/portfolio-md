@@ -1,5 +1,6 @@
 import Intro from '@/components/intro'
 import RecentPosts from '@/components/recent-post'
+import RecentProjects from '@/components/recent-projects'
 
 const Home = () => {
   return (
@@ -7,6 +8,7 @@ const Home = () => {
       <div className='container max-w-3xl'>
         <Intro />
         <RecentPosts />
+        <RecentProjects />
       </div>
     </section>
   )
