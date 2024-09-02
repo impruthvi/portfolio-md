@@ -1,17 +1,10 @@
-import Intro from "@/components/intro"
-import { MDXRemote } from "next-mdx-remote/rsc"
+import Intro from '@/components/intro'
 
 const Home = () => {
-
-  const content = `
-    # Hello World
-  `
-
   return (
     <section className='py-24'>
       <div className='container max-w-3xl'>
-          <Intro />
-          <MDXRemote source={content} />
+        <Intro />
       </div>
     </section>
   )

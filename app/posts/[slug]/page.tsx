@@ -1,4 +1,5 @@
 import { getPostBySlug } from '@/actions/posts'
+import MDXContent from '@/components/mdx-content'
 import { formatDate } from '@/lib/utils'
 import { ArrowLeftIcon } from 'lucide-react'
 import { MDXRemote } from 'next-mdx-remote/rsc'
@@ -22,10 +23,6 @@ const Post = async ({ params: { slug } }: Props) => {
 
   const { metadata, content } = post
   const { title, image, author, publishedAt } = metadata
-
-  const component = {
-    h2: (props: any) => <h2 {...props} className='text-red-500'>{props.children}</h2>,
-  }
 
   return (
     <section className='pb-24 pt-32'>
@@ -56,8 +53,8 @@ const Post = async ({ params: { slug } }: Props) => {
           </p>
         </header>
 
-        <main className='prose dark:prose-invert mt-16'>
-          <MDXRemote source={content} components={component}/>
+        <main className='prose mt-16 dark:prose-invert'>
+          <MDXContent source={content} />
         </main>
 
         <footer className='mt-16'></footer>
