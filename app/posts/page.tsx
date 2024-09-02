@@ -1,5 +1,5 @@
 import { getPosts } from '@/actions/posts'
-import Posts from '@/components/posts'
+import PostsWithSearch from '@/components/posts-with-search'
 import React from 'react'
 
 type Props = {}
@@ -11,7 +11,7 @@ const PostsPage = async (props: Props) => {
       <div className='container max-w-3xl'>
         <h1 className='title mb-12'>Posts</h1>
 
-        <Posts posts={posts} />
+        <PostsWithSearch posts={posts} />
       </div>
     </section>
   )
