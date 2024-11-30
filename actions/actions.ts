@@ -10,7 +10,6 @@ type NewsletterFormInputs = z.infer<typeof NewsletterFormSchema>
 const resend = new Resend(process.env.RESEND_API_KEY)
 
 export async function sendEmail(data: ContactFormInputs) {
-    
   const result = ContactFormSchema.safeParse(data)
 
   if (result.error) {
@@ -20,9 +19,9 @@ export async function sendEmail(data: ContactFormInputs) {
   try {
     const { name, email, message } = result.data
     const { data, error } = await resend.emails.send({
-      from: 'contact@ailearning.click',
+      from: 'contact@impruthvi.me',
       to: [email],
-      cc: ['contact@ailearning.click'],
+      cc: ['contact@impruthvi.me'],
       subject: 'Contact form submission',
       text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
       react: ContactFormEmail({ name, email, message })
@@ -34,8 +33,8 @@ export async function sendEmail(data: ContactFormInputs) {
 
     return { success: true }
   } catch (error) {
-    console.log(`Error: ${error}`);
-    
+    console.log(`Error: ${error}`)
+
     return { error }
   }
 }
