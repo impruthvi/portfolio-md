@@ -14,7 +14,7 @@ export default function Projects({
       {projects.map(project => (
         <li key={project.slug} className='group relative'>
           <Link href={`/projects/${project.slug}`}>
-            {project.image && (
+            {project.image ? (
               <div className='h-72 w-full overflow-hidden bg-muted sm:h-60'>
                 <Image
                   src={project.image}
@@ -22,6 +22,12 @@ export default function Projects({
                   fill
                   className='rounded-lg object-cover object-center transition-transform duration-500 group-hover:scale-105'
                 />
+              </div>
+            ) : (
+              <div className='flex h-72 w-full items-center justify-center rounded-lg border bg-muted transition-transform duration-500 group-hover:scale-105 sm:h-60'>
+                <span className='text-center text-xl font-semibold text-primary'>
+                  {project.title}
+                </span>
               </div>
             )}
 
@@ -44,3 +50,4 @@ export default function Projects({
     </ul>
   )
 }
+1
