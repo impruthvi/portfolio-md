@@ -1,4 +1,5 @@
 import Intro from '@/components/intro'
+import Experience from '@/components/experience'
 import RecentPosts from '@/components/recent-post'
 import RecentProjects from '@/components/recent-projects'
 
@@ -7,6 +8,7 @@ const Home = () => {
     <section className='py-24'>
       <div className='container max-w-3xl'>
         <Intro />
+        <Experience />
         <RecentPosts />
         <RecentProjects />
       </div>
