@@ -82,7 +82,6 @@ export async function generateStaticParams() {
 export default async function Project({ params }: Props) {
   const { slug } = params
   const project = await getProjectBySlug(slug)
-  console.log(project)
 
   if (!project) {
     notFound()
