@@ -2,6 +2,7 @@ import { getPostBySlug, getPosts } from '@/actions/posts'
 import MDXContent from '@/components/mdx-content'
 import { formatDate } from '@/lib/utils'
 import { ArrowLeftIcon } from 'lucide-react'
+import { Metadata } from 'next'
 import { MDXRemote } from 'next-mdx-remote/rsc'
 import Image from 'next/image'
 import Link from 'next/link'
@@ -11,6 +12,60 @@ import React from 'react'
 type Props = {
   params: {
     slug: string
+  }
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const post = await getPostBySlug(params.slug)
+
+  if (!post) {
+    return {
+      title: 'Post Not Found | IMPRUTHVI',
+      description: 'The requested blog post could not be found.'
+    }
+  }
+
+  const { metadata } = post
+  const {
+    title,
+    summary = 'Blog post by IMPRUTHVI',
+    image,
+    publishedAt
+  } = metadata
+
+  return {
+    title: `${title} | IMPRUTHVI - Developer`,
+    description: summary,
+    authors: [{ name: metadata.author }],
+    openGraph: {
+      title: `${title} | IMPRUTHVI - Developer`,
+      description: summary,
+      type: 'article',
+      publishedTime: publishedAt?.toString(),
+      images: image
+        ? [
+            {
+              url: image,
+              alt: title
+            }
+          ]
+        : []
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: title,
+      description: summary,
+      images: image ? [image] : []
+    },
+    alternates: {
+      canonical: `/posts/${params.slug}`
+    },
+    keywords: [
+      'developer blog',
+      'tech insights',
+      'programming',
+      metadata.author!
+    ]
   }
 }
 

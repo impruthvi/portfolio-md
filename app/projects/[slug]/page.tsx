@@ -1,11 +1,76 @@
 import Link from 'next/link'
 import Image from 'next/image'
+import { Metadata } from 'next'
 
 import { formatDate } from '@/lib/utils'
 import MDXContent from '@/components/mdx-content'
 import { ArrowLeftIcon } from '@radix-ui/react-icons'
 import { getProjectBySlug, getProjects } from '@/actions/projects'
 import { notFound } from 'next/navigation'
+
+type Props = {
+  params: {
+    slug: string
+  }
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const project = await getProjectBySlug(params.slug)
+
+  if (!project) {
+    return {
+      title: 'Project Not Found | IMPRUTHVI',
+      description: 'The requested project could not be found.'
+    }
+  }
+
+  const { metadata } = project
+  const {
+    title,
+    summary = 'Project by IMPRUTHVI',
+    image,
+    publishedAt
+  } = metadata
+
+  return {
+    title: `${title} | IMPRUTHVI - Developer Project`,
+    description: summary,
+    authors: [{ name: metadata.author }],
+    openGraph: {
+      title: `${title} | IMPRUTHVI - Developer Project`,
+      description: summary,
+      type: 'article',
+      publishedTime: publishedAt?.toString(),
+      images: image
+        ? [
+            {
+              url: image,
+              alt: title
+            }
+          ]
+        : []
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: title,
+      description: summary,
+      images: image ? [image] : []
+    },
+    alternates: {
+      canonical: `/projects/${params.slug}`
+    },
+    keywords: [
+      'web development project',
+      'software development',
+      'coding project',
+      'tech project',
+      metadata.author!,
+      title!.toLowerCase().split(' ')
+    ]
+      .flat()
+      .filter(Boolean)
+  }
+}
 
 export async function generateStaticParams() {
   const projects = await getProjects()
@@ -14,14 +79,10 @@ export async function generateStaticParams() {
   return slugs
 }
 
-export default async function Project({
-  params
-}: {
-  params: { slug: string }
-}) {
+export default async function Project({ params }: Props) {
   const { slug } = params
   const project = await getProjectBySlug(slug)
-console.log(project);
+  console.log(project)
 
   if (!project) {
     notFound()
