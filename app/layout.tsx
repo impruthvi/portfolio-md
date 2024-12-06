@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Inter, Playfair_Display } from 'next/font/google'
+import { Analytics } from '@vercel/analytics/react'
 
 import { cn } from '@/lib/utils'
 
@@ -96,7 +97,10 @@ export default function RootLayout({
       >
         <Providers>
           <Header />
-          <main className='grow'>{children}</main>
+          <main className='grow'>
+            {children}
+            <Analytics />
+          </main>
           <Footer />
         </Providers>
       </body>
