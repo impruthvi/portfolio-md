@@ -13,13 +13,12 @@ type Props = {
     slug: string
   }
 }
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const project = await getProjectBySlug(params.slug)
 
   if (!project) {
     return {
-      title: 'Project Not Found | IMPRUTHVI',
+      title: 'Project Not Found | IMPRUTHVI - Pruthvisinh Rajput',
       description: 'The requested project could not be found.'
     }
   }
@@ -27,17 +26,17 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { metadata } = project
   const {
     title,
-    summary = 'Project by IMPRUTHVI',
+    summary = 'Project by Pruthvisinh Rajput (IMPRUTHVI)',
     image,
     publishedAt
   } = metadata
 
   return {
-    title: `${title} | IMPRUTHVI - Developer Project`,
+    title: `${title} | IMPRUTHVI - Pruthvisinh Rajput Project`,
     description: summary,
-    authors: [{ name: metadata.author }],
+    authors: [{ name: 'Pruthvisinh Rajput (IMPRUTHVI)' }],
     openGraph: {
-      title: `${title} | IMPRUTHVI - Developer Project`,
+      title: `${title} | IMPRUTHVI - Pruthvisinh Rajput Project`,
       description: summary,
       type: 'article',
       publishedTime: publishedAt?.toString(),
@@ -45,14 +44,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         ? [
             {
               url: image,
-              alt: title
+              alt: `${title} by Pruthvisinh Rajput (IMPRUTHVI)`
             }
           ]
         : []
     },
     twitter: {
       card: 'summary_large_image',
-      title: title,
+      title: `${title} | IMPRUTHVI - Pruthvisinh Rajput Project`,
       description: summary,
       images: image ? [image] : []
     },
@@ -60,12 +59,15 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       canonical: `/projects/${params.slug}`
     },
     keywords: [
+      'Pruthvisinh Rajput projects',
+      'IMPRUTHVI projects',
       'web development project',
       'software development',
       'coding project',
       'tech project',
+      'full-stack development',
       metadata.author!,
-      title!.toLowerCase().split(' ')
+      ...title!.toLowerCase().split(' ')
     ]
       .flat()
       .filter(Boolean)

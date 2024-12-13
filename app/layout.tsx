@@ -18,12 +18,14 @@ const playfair = Playfair_Display({
 export const metadata: Metadata = {
   metadataBase: new URL('https://impruthvi.me'),
   title: {
-    default: 'IMPRUTHVI - Full-Stack Developer',
-    template: '%s | IMPRUTHVI'
+    default: 'IMPRUTHVI - Pruthvisinh Rajput - Full-Stack Developer',
+    template: '%s | IMPRUTHVI - Pruthvisinh Rajput'
   },
   description:
-    'Full-stack developer creating scalable web applications with expertise in JavaScript, TypeScript, React, and Node.js. Passionate about innovative technology solutions.',
+    'Pruthvisinh Rajput, also known as IMPRUTHVI, is a full-stack developer creating scalable web applications with expertise in JavaScript, TypeScript, React, and Node.js. Passionate about innovative technology solutions.',
   keywords: [
+    'Pruthvisinh Rajput',
+    'IMPRUTHVI',
     'full-stack developer',
     'web development',
     'JavaScript',
@@ -31,32 +33,31 @@ export const metadata: Metadata = {
     'React',
     'Node.js',
     'software engineering',
-    'web applications',
-    'IMPRUTHVI'
+    'web applications'
   ],
-  authors: [{ name: 'IMPRUTHVI' }],
+  authors: [{ name: 'Pruthvisinh Rajput (IMPRUTHVI)' }],
   openGraph: {
     type: 'website',
     locale: 'en_US',
     url: 'https://impruthvi.me',
     siteName: 'IMPRUTHVI Portfolio',
-    title: 'IMPRUTHVI - Full-Stack Developer',
+    title: 'IMPRUTHVI - Pruthvisinh Rajput - Full-Stack Developer',
     description:
-      'Full-stack developer creating scalable web applications with expertise in JavaScript, TypeScript, React, and Node.js.',
+      'Pruthvisinh Rajput, also known as IMPRUTHVI, is a full-stack developer creating scalable web applications with expertise in JavaScript, TypeScript, React, and Node.js.',
     images: [
       {
         url: '/og-image.png',
         width: 1200,
         height: 630,
-        alt: 'IMPRUTHVI - Full-Stack Developer Portfolio'
+        alt: 'IMPRUTHVI - Pruthvisinh Rajput - Full-Stack Developer Portfolio'
       }
     ]
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'IMPRUTHVI - Full-Stack Developer',
+    title: 'IMPRUTHVI - Pruthvisinh Rajput - Full-Stack Developer',
     description:
-      'Full-stack developer creating scalable web applications with expertise in JavaScript, TypeScript, React, and Node.js.',
+      'Pruthvisinh Rajput, also known as IMPRUTHVI, is a full-stack developer creating scalable web applications with expertise in JavaScript, TypeScript, React, and Node.js.',
     images: ['/twitter-image.png']
   },
   alternates: {

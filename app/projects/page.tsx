@@ -4,23 +4,24 @@ import Projects from '@/components/projects'
 import { getProjects } from '@/actions/projects'
 
 export const metadata: Metadata = {
-  title: 'Projects | IMPRUTHVI - Developer Portfolio',
+  title: 'Projects | IMPRUTHVI - Pruthvisinh Rajput Portfolio',
   description:
-    'Explore a collection of web development projects showcasing my technical skills, innovative solutions, and expertise in modern web technologies.',
+    'Explore a collection of web development projects by Pruthvisinh Rajput (IMPRUTHVI), showcasing technical skills, innovative solutions, and expertise in modern web technologies.',
   openGraph: {
-    title: 'Projects | IMPRUTHVI - Developer Portfolio',
+    title: 'Projects | IMPRUTHVI - Pruthvisinh Rajput Portfolio',
     description:
-      'Explore a collection of web development projects showcasing my technical skills, innovative solutions, and expertise in modern web technologies.',
+      'Explore a collection of web development projects by Pruthvisinh Rajput (IMPRUTHVI), showcasing technical skills, innovative solutions, and expertise in modern web technologies.',
     type: 'website'
   },
   keywords: [
+    'Pruthvisinh Rajput projects',
+    'IMPRUTHVI portfolio',
     'web development projects',
     'software development portfolio',
     'developer projects',
     'web technologies',
     'coding portfolio',
-    'full-stack development',
-    'IMPRUTHVI projects'
+    'full-stack development'
   ]
 }
 

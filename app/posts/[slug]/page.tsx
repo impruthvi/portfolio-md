@@ -14,31 +14,31 @@ type Props = {
     slug: string
   }
 }
-
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const post = await getPostBySlug(params.slug)
 
   if (!post) {
     return {
-      title: 'Post Not Found | IMPRUTHVI',
-      description: 'The requested blog post could not be found.'
+      title: 'Post Not Found | IMPRUTHVI - Pruthvisinh Rajput',
+      description:
+        'The requested blog post by Pruthvisinh Rajput (IMPRUTHVI) could not be found.'
     }
   }
 
   const { metadata } = post
   const {
     title,
-    summary = 'Blog post by IMPRUTHVI',
+    summary = 'Blog post by Pruthvisinh Rajput (IMPRUTHVI)',
     image,
     publishedAt
   } = metadata
 
   return {
-    title: `${title} | IMPRUTHVI - Developer`,
+    title: `${title} | IMPRUTHVI - Pruthvisinh Rajput`,
     description: summary,
-    authors: [{ name: metadata.author }],
+    authors: [{ name: 'Pruthvisinh Rajput (IMPRUTHVI)' }],
     openGraph: {
-      title: `${title} | IMPRUTHVI - Developer`,
+      title: `${title} | IMPRUTHVI - Pruthvisinh Rajput`,
       description: summary,
       type: 'article',
       publishedTime: publishedAt?.toString(),
@@ -46,14 +46,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
         ? [
             {
               url: image,
-              alt: title
+              alt: `${title} by Pruthvisinh Rajput (IMPRUTHVI)`
             }
           ]
         : []
     },
     twitter: {
       card: 'summary_large_image',
-      title: title,
+      title: `${title} | IMPRUTHVI - Pruthvisinh Rajput`,
       description: summary,
       images: image ? [image] : []
     },
@@ -61,11 +61,16 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       canonical: `/posts/${params.slug}`
     },
     keywords: [
-      'developer blog',
-      'tech insights',
-      'programming',
-      metadata.author!
+      'Pruthvisinh Rajput blog',
+      'IMPRUTHVI blog post',
+      'developer insights',
+      'software development',
+      'tech blog',
+      metadata.author!,
+      ...title!.toLowerCase().split(' ')
     ]
+      .flat()
+      .filter(Boolean)
   }
 }
 

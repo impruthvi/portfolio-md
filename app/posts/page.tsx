@@ -6,14 +6,41 @@ import { Metadata } from 'next'
 type Props = {}
 
 export const metadata: Metadata = {
-  title: 'Blog Posts | IMPRUTHVI - Developer',
+  title: 'Blog Posts | IMPRUTHVI - Pruthvisinh Rajput',
   description:
-    'Explore blog posts and technical insights by IMPRUTHVI, a passionate developer sharing knowledge and experiences in software development.',
+    'Discover technical insights, tutorials, and experiences shared by Pruthvisinh Rajput (IMPRUTHVI), a full-stack developer passionate about modern web technologies and software development.',
   openGraph: {
-    title: 'Blog Posts | IMPRUTHVI - Developer',
+    title: 'Blog Posts | IMPRUTHVI - Pruthvisinh Rajput',
     description:
-      'Explore blog posts and technical insights by IMPRUTHVI, a passionate developer sharing knowledge and experiences in software development.',
-    type: 'website'
+      'Discover technical insights, tutorials, and experiences shared by Pruthvisinh Rajput (IMPRUTHVI), a full-stack developer passionate about modern web technologies and software development.',
+    type: 'website',
+    images: [
+      {
+        url: '/blog-og-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'Blog Posts by Pruthvisinh Rajput (IMPRUTHVI)'
+      }
+    ]
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Blog Posts | IMPRUTHVI - Pruthvisinh Rajput',
+    description:
+      'Discover technical insights, tutorials, and experiences shared by Pruthvisinh Rajput (IMPRUTHVI), a full-stack developer passionate about modern web technologies and software development.',
+    images: ['/blog-twitter-image.png']
+  },
+  keywords: [
+    'Pruthvisinh Rajput blog',
+    'IMPRUTHVI blog posts',
+    'developer insights',
+    'software development tutorials',
+    'web development articles',
+    'full-stack development blog',
+    'modern web technologies'
+  ],
+  alternates: {
+    canonical: '/blog'
   }
 }
 
