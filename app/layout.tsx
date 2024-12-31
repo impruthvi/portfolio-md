@@ -46,7 +46,7 @@ export const metadata: Metadata = {
       'Pruthvisinh Rajput, also known as IMPRUTHVI, is a full-stack developer creating scalable web applications with expertise in JavaScript, TypeScript, React, and Node.js.',
     images: [
       {
-        url: '/og-image.png',
+        url: '/authors/impruthvi.jpg',
         width: 1200,
         height: 630,
         alt: 'IMPRUTHVI - Pruthvisinh Rajput - Full-Stack Developer Portfolio'
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
     title: 'IMPRUTHVI - Pruthvisinh Rajput - Full-Stack Developer',
     description:
       'Pruthvisinh Rajput, also known as IMPRUTHVI, is a full-stack developer creating scalable web applications with expertise in JavaScript, TypeScript, React, and Node.js.',
-    images: ['/twitter-image.png']
+    images: ['/authors/impruthvi.jpg']
   },
   alternates: {
     canonical: 'https://impruthvi.me'
@@ -77,8 +77,8 @@ export const metadata: Metadata = {
   category: 'Technology',
   icons: {
     icon: '/favicon.ico',
-    shortcut: '/favicon-16x16.png',
-    apple: '/apple-touch-icon.png'
+    shortcut: '/favicon.ico',
+    apple: '/favicon.ico'
   }
 }
 
