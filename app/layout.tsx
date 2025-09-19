@@ -8,6 +8,7 @@ import './globals.css'
 import Providers from '@/providers'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
+import Script from 'next/script'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' })
 const playfair = Playfair_Display({
@@ -96,6 +97,12 @@ export default function RootLayout({
           playfair.variable
         )}
       >
+        <Script
+          src="https://voxa-widget.vercel.app/widget.js"
+          data-organization-id="org_32vebynMvDQfCJBEzu7CtfAmYWW"
+          strategy="afterInteractive"
+        />
+
         <Providers>
           <Header />
           <main className='grow'>
