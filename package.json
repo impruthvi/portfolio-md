@@ -1,7 +1,18 @@
 {
-  "name": "portfolio",
-  "version": "0.1.0",
+  "name": "impruthvi-portfolio",
+  "version": "1.0.0",
   "private": true,
+  "description": "Personal portfolio and blog of Pruthvisinh Rajput (IMPRUTHVI) - Full-stack developer",
+  "author": {
+    "name": "Pruthvisinh Rajput",
+    "email": "contact@impruthvi.me",
+    "url": "https://impruthvi.me"
+  },
+  "homepage": "https://impruthvi.me",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/impruthvi/portfolio-md"
+  },
   "scripts": {
     "dev": "next dev",
     "build": "next build",

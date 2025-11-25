@@ -20,9 +20,9 @@ export async function sendEmail(data: ContactFormInputs) {
     const { name, email, message } = result.data
     const { data, error } = await resend.emails.send({
       from: 'contact@impruthvi.me',
-      to: [email],
-      cc: ['contact@impruthvi.me'],
-      subject: 'Contact form submission',
+      to: ['contact@impruthvi.me'],
+      replyTo: email,
+      subject: `New Contact Form Submission from ${name}`,
       text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
       react: ContactFormEmail({ name, email, message })
     })
@@ -57,7 +57,19 @@ export async function subscribe(data: NewsletterFormInputs) {
       throw new Error('Failed to subscribe')
     }
 
-    // TODO: Send a welcome email
+    // Send welcome email to new subscriber
+    await resend.emails.send({
+      from: 'contact@impruthvi.me',
+      to: [email],
+      subject: 'Welcome to IMPRUTHVI Newsletter! 🎉',
+      html: `
+        <h1>Thanks for subscribing!</h1>
+        <p>Hey there! 👋</p>
+        <p>Thanks for subscribing to my newsletter. I'll share updates about new blog posts, projects, and tech insights.</p>
+        <p>Don't worry - I won't spam you. Only quality content, I promise!</p>
+        <p>Cheers,<br/>Pruthvisinh Rajput (IMPRUTHVI)</p>
+      `
+    })
 
     return { success: true }
   } catch (error) {

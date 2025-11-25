@@ -1,36 +1,173 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# IMPRUTHVI Portfolio
 
-## Getting Started
+Personal portfolio and blog website of Pruthvisinh Rajput (IMPRUTHVI) - A full-stack developer passionate about building scalable web applications.
 
-First, run the development server:
+## 🚀 Tech Stack
+
+- **Framework:** [Next.js 14](https://nextjs.org/) (App Router)
+- **Language:** [TypeScript](https://www.typescriptlang.org/)
+- **Styling:** [TailwindCSS](https://tailwindcss.com/)
+- **Content:** [MDX](https://mdxjs.com/) with [next-mdx-remote](https://github.com/hashicorp/next-mdx-remote)
+- **UI Components:** [Radix UI](https://www.radix-ui.com/) + [shadcn/ui](https://ui.shadcn.com/)
+- **Forms:** [React Hook Form](https://react-hook-form.com/) + [Zod](https://zod.dev/)
+- **Email:** [Resend](https://resend.com/)
+- **Analytics:** [Vercel Analytics](https://vercel.com/analytics)
+- **Deployment:** [Vercel](https://vercel.com/)
+
+## ✨ Features
+
+- 🎨 Modern, clean design with dark mode support
+- 📝 MDX-powered blog with syntax highlighting
+- 💼 Project showcase
+- 📧 Contact form with email integration
+- 🔍 Search functionality for blog posts
+- 📱 Fully responsive design
+- ⚡ Optimized for performance and SEO
+- 🎯 Type-safe with TypeScript
+
+## 🛠️ Getting Started
+
+### Prerequisites
+
+- Node.js 18+ or Bun
+- A Resend account (for contact form)
+
+### Installation
+
+1. Clone the repository:
+
+```bash
+git clone https://github.com/impruthvi/portfolio-md.git
+cd portfolio-md
+```
+
+2. Install dependencies:
+
+```bash
+npm install
+# or
+yarn install
+# or
+bun install
+```
+
+3. Create a `.env.local` file based on `.env.example`:
+
+```bash
+cp .env.example .env.local
+```
+
+4. Add your environment variables to `.env.local`:
+
+```env
+RESEND_API_KEY=your_resend_api_key
+RESEND_AUDIENCE_ID=your_audience_id
+NEXT_PUBLIC_URL=http://localhost:3000
+```
+
+5. Run the development server:
 
 ```bash
 npm run dev
 # or
 yarn dev
 # or
-pnpm dev
-# or
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+6. Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## 📁 Project Structure
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+```
+portfolio-md/
+├── app/                      # Next.js App Router pages
+│   ├── posts/               # Blog posts pages
+│   ├── projects/            # Projects pages
+│   ├── contact/             # Contact page
+│   └── privacy/             # Privacy policy page
+├── actions/                  # Server actions
+│   ├── actions.ts           # Email actions
+│   ├── posts.ts             # Blog post utilities
+│   └── projects.ts          # Project utilities
+├── components/              # React components
+│   ├── ui/                  # Shadcn UI components
+│   └── ...                  # Feature components
+├── content/                 # MDX content
+│   ├── posts/              # Blog post MDX files
+│   └── projects/           # Project MDX files
+├── lib/                    # Utilities and schemas
+├── public/                 # Static assets
+│   └── images/            # Images for posts, projects, authors
+└── emails/                # Email templates
+```
 
-## Learn More
+## 📝 Adding Content
 
-To learn more about Next.js, take a look at the following resources:
+### Adding a Blog Post
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+1. Create a new `.mdx` file in `content/posts/`:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+```mdx
+---
+title: Your Post Title
+summary: A brief summary of your post
+image: /images/posts/your-image.webp
+author: 'Pruthvisinh Rajput'
+publishedAt: '2025-11-25'
+---
 
-## Deploy on Vercel
+Your content here...
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+2. Add images to `public/images/posts/`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+### Adding a Project
+
+1. Create a new `.mdx` file in `content/projects/`:
+
+```mdx
+---
+title: Your Project Title
+summary: A brief description
+image: /images/projects/your-image.webp
+author: 'Pruthvisinh Rajput'
+publishedAt: '2025-11-25'
+---
+
+Your project details...
+```
+
+2. Add images to `public/images/projects/`
+
+## 🚀 Deployment
+
+The easiest way to deploy is using [Vercel](https://vercel.com):
+
+1. Push your code to GitHub
+2. Import your repository in Vercel
+3. Add environment variables
+4. Deploy!
+
+## 📄 License
+
+This project is open source and available under the [MIT License](LICENSE).
+
+## 👤 Author
+
+**Pruthvisinh Rajput (IMPRUTHVI)**
+
+- Website: [impruthvi.me](https://impruthvi.me)
+- GitHub: [@impruthvi](https://github.com/impruthvi)
+- LinkedIn: [Pruthvisinh Rajput](https://www.linkedin.com/in/pruthvisinh-rajput-9a4711194/)
+- Twitter: [@impruthvi13](https://twitter.com/impruthvi13)
+
+## 🙏 Acknowledgments
+
+- Built with [Next.js](https://nextjs.org/)
+- UI components from [shadcn/ui](https://ui.shadcn.com/)
+- Icons from [Radix Icons](https://www.radix-ui.com/icons) and [Lucide](https://lucide.dev/)
+
+---
+
+⭐ If you found this helpful, please consider giving it a star!
