@@ -59,7 +59,9 @@ export const metadata: Metadata = {
     title: 'IMPRUTHVI - Pruthvisinh Rajput - Full-Stack Developer',
     description:
       'Pruthvisinh Rajput, also known as IMPRUTHVI, is a full-stack developer creating scalable web applications with expertise in JavaScript, TypeScript, React, and Node.js.',
-    images: ['/authors/impruthvi.jpg']
+    images: ['/authors/impruthvi.jpg'],
+    creator: '@impruthvi13',
+    site: '@impruthvi13'
   },
   alternates: {
     canonical: 'https://impruthvi.me'
@@ -80,7 +82,21 @@ export const metadata: Metadata = {
     icon: '/favicon.ico',
     shortcut: '/favicon.ico',
     apple: '/favicon.ico'
-  }
+  },
+  manifest: '/site.webmanifest',
+  applicationName: 'IMPRUTHVI Portfolio',
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: 'default',
+    title: 'IMPRUTHVI'
+  },
+  formatDetection: {
+    telephone: false
+  },
+  themeColor: [
+    { media: '(prefers-color-scheme: light)', color: 'white' },
+    { media: '(prefers-color-scheme: dark)', color: '#0a0a0a' }
+  ]
 }
 
 export default function RootLayout({
@@ -97,6 +113,14 @@ export default function RootLayout({
           playfair.variable
         )}
       >
+        {/* Skip to main content link for accessibility */}
+        <a
+          href='#main-content'
+          className='sr-only focus:not-sr-only focus:absolute focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground focus:outline-none focus:ring-2 focus:ring-ring'
+        >
+          Skip to main content
+        </a>
+
         <Script
           src="https://voxa-widget.vercel.app/widget.js"
           data-organization-id="org_32vebynMvDQfCJBEzu7CtfAmYWW"
@@ -105,7 +129,7 @@ export default function RootLayout({
 
         <Providers>
           <Header />
-          <main className='grow'>
+          <main id='main-content' className='grow'>
             {children}
             <Analytics />
           </main>

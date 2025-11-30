@@ -4,7 +4,7 @@ import { Metadata } from 'next'
 
 import { formatDate } from '@/lib/utils'
 import MDXContent from '@/components/mdx-content'
-import { ArrowLeftIcon } from '@radix-ui/react-icons'
+import { ArrowLeftIcon } from 'lucide-react'
 import { getProjectBySlug, getProjects } from '@/actions/projects'
 import { notFound } from 'next/navigation'
 

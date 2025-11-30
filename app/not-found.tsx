@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { ArrowLeftIcon } from '@radix-ui/react-icons'
+import { ArrowLeftIcon } from 'lucide-react'
 
 export default function NotFound() {
   return (

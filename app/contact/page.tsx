@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/contact-og-image.png',
+        url: '/images/authors/impruthvi.jpg',
         width: 1200,
         height: 630,
         alt: 'Contact Pruthvisinh Rajput (IMPRUTHVI)'
@@ -24,7 +24,8 @@ export const metadata: Metadata = {
     title: 'Contact | IMPRUTHVI - Pruthvisinh Rajput',
     description:
       'Contact Pruthvisinh Rajput (IMPRUTHVI) to discuss your project and explore innovative solutions in web development.',
-    images: ['/contact-twitter-image.png']
+    images: ['/images/authors/impruthvi.jpg'],
+    creator: '@impruthvi13'
   },
   alternates: {
     canonical: '/contact'

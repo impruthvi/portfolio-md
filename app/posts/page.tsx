@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     type: 'website',
     images: [
       {
-        url: '/blog-og-image.png',
+        url: '/images/authors/impruthvi.jpg',
         width: 1200,
         height: 630,
         alt: 'Blog Posts by Pruthvisinh Rajput (IMPRUTHVI)'
@@ -28,7 +28,8 @@ export const metadata: Metadata = {
     title: 'Blog Posts | IMPRUTHVI - Pruthvisinh Rajput',
     description:
       'Discover technical insights, tutorials, and experiences shared by Pruthvisinh Rajput (IMPRUTHVI), a full-stack developer passionate about modern web technologies and software development.',
-    images: ['/blog-twitter-image.png']
+    images: ['/images/authors/impruthvi.jpg'],
+    creator: '@impruthvi13'
   },
   keywords: [
     'Pruthvisinh Rajput blog',

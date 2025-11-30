@@ -1,6 +1,6 @@
 import { Metadata } from 'next'
 import Link from 'next/link'
-import { ArrowLeftIcon } from '@radix-ui/react-icons'
+import { ArrowLeftIcon } from 'lucide-react'
 
 export const metadata: Metadata = {
   title: 'Privacy Policy | IMPRUTHVI - Pruthvisinh Rajput',

@@ -1,0 +1,16 @@
+{
+  "name": "IMPRUTHVI - Pruthvisinh Rajput Portfolio",
+  "short_name": "IMPRUTHVI",
+  "description": "Personal portfolio and blog of Pruthvisinh Rajput - Full-stack developer",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "icons": [
+    {
+      "src": "/favicon.ico",
+      "sizes": "any",
+      "type": "image/x-icon"
+    }
+  ]
+}
