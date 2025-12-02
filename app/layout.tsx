@@ -3,6 +3,7 @@ import { Inter, Playfair_Display } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/react'
 
 import { cn } from '@/lib/utils'
+import { getPersonStructuredData } from '@/lib/structured-data'
 
 import './globals.css'
 import Providers from '@/providers'
@@ -64,7 +65,10 @@ export const metadata: Metadata = {
     site: '@impruthvi13'
   },
   alternates: {
-    canonical: 'https://impruthvi.me'
+    canonical: 'https://impruthvi.me',
+    types: {
+      'application/rss+xml': 'https://impruthvi.me/rss.xml'
+    }
   },
   robots: {
     index: true,
@@ -125,6 +129,14 @@ export default function RootLayout({
           src="https://voxa-widget.vercel.app/widget.js"
           data-organization-id="org_32vebynMvDQfCJBEzu7CtfAmYWW"
           strategy="afterInteractive"
+        />
+
+        {/* JSON-LD Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(getPersonStructuredData())
+          }}
         />
 
         <Providers>

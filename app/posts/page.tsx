@@ -41,7 +41,7 @@ export const metadata: Metadata = {
     'modern web technologies'
   ],
   alternates: {
-    canonical: '/blog'
+    canonical: 'https://impruthvi.me/posts'
   }
 }
 

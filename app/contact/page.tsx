@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     creator: '@impruthvi13'
   },
   alternates: {
-    canonical: '/contact'
+    canonical: 'https://impruthvi.me/contact'
   },
   keywords: [
     'contact IMPRUTHVI',

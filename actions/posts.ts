@@ -1,6 +1,7 @@
 import fs from 'fs'
 import path from 'path'
 import matter from 'gray-matter'
+import { MDXFrontmatterSchema } from '@/lib/mdx-validation'
 
 const rootDirectory = path.join(process.cwd(), 'content', 'posts')
 
@@ -23,8 +24,17 @@ export async function getPostBySlug(slug: string): Promise<Post | null> {
     const filePath = path.join(rootDirectory, `${slug}.mdx`)
     const fileContent = fs.readFileSync(filePath, { encoding: 'utf8' })
     const { data, content } = matter(fileContent)
-    return { metadata: { ...data, slug }, content }
+    
+    // Validate frontmatter
+    const validatedData = MDXFrontmatterSchema.safeParse({ ...data, slug })
+    if (!validatedData.success) {
+      console.error(`Invalid frontmatter for ${slug}:`, validatedData.error)
+      return null
+    }
+    
+    return { metadata: validatedData.data, content }
   } catch (error) {
+    console.error(`Error reading post ${slug}:`, error)
     return null
   }
 }

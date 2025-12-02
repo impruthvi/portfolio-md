@@ -1,6 +1,9 @@
 import { getPostBySlug, getPosts } from '@/actions/posts'
 import MDXContent from '@/components/mdx-content'
+import Breadcrumbs from '@/components/breadcrumbs'
+import RelatedPosts from '@/components/related-posts'
 import { formatDate } from '@/lib/utils'
+import { getBlogPostStructuredData } from '@/lib/content-structured-data'
 import { ArrowLeftIcon } from 'lucide-react'
 import { Metadata } from 'next'
 import { MDXRemote } from 'next-mdx-remote/rsc'
@@ -58,7 +61,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       images: image ? [image] : []
     },
     alternates: {
-      canonical: `/posts/${params.slug}`
+      canonical: `https://impruthvi.me/posts/${params.slug}`
     },
     keywords: [
       'Pruthvisinh Rajput blog',
@@ -89,11 +92,36 @@ const Post = async ({ params: { slug } }: Props) => {
   }
 
   const { metadata, content } = post
-  const { title, image, author, publishedAt } = metadata
+  const { title, image, author, publishedAt, summary } = metadata
+
+  // Get all posts for related posts
+  const allPosts = await getPosts()
+
+  const structuredData = getBlogPostStructuredData(
+    title || '',
+    summary || '',
+    slug,
+    publishedAt || new Date().toISOString(),
+    author || 'Pruthvisinh Rajput',
+    image
+  )
 
   return (
     <section className='pb-24 pt-32'>
+      {/* JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+
       <div className='container max-w-3xl'>
+        <Breadcrumbs
+          items={[
+            { label: 'Posts', href: '/posts' },
+            { label: title || 'Post' }
+          ]}
+        />
+
         <Link
           href='/posts'
           className='mb-8 inline-flex items-center gap-2 text-sm font-light text-muted-foreground transition-colors hover:text-foreground'
@@ -124,7 +152,7 @@ const Post = async ({ params: { slug } }: Props) => {
           <MDXContent source={content} />
         </main>
 
-        <footer className='mt-16'></footer>
+        <RelatedPosts posts={allPosts} currentSlug={slug} />
       </div>
     </section>
   )

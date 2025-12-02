@@ -4,6 +4,8 @@ import { Metadata } from 'next'
 
 import { formatDate } from '@/lib/utils'
 import MDXContent from '@/components/mdx-content'
+import Breadcrumbs from '@/components/breadcrumbs'
+import { getProjectStructuredData } from '@/lib/content-structured-data'
 import { ArrowLeftIcon } from 'lucide-react'
 import { getProjectBySlug, getProjects } from '@/actions/projects'
 import { notFound } from 'next/navigation'
@@ -56,7 +58,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       images: image ? [image] : []
     },
     alternates: {
-      canonical: `/projects/${params.slug}`
+      canonical: `https://impruthvi.me/projects/${params.slug}`
     },
     keywords: [
       'Pruthvisinh Rajput projects',
@@ -90,11 +92,33 @@ export default async function Project({ params }: Props) {
   }
 
   const { metadata, content } = project
-  const { title, image, author, publishedAt } = metadata
+  const { title, image, author, publishedAt, summary } = metadata
+
+  const structuredData = getProjectStructuredData(
+    title || '',
+    summary || '',
+    slug,
+    publishedAt || new Date().toISOString(),
+    author || 'Pruthvisinh Rajput',
+    image
+  )
 
   return (
     <section className='pb-24 pt-32'>
+      {/* JSON-LD Structured Data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
+      />
+
       <div className='container max-w-3xl'>
+        <Breadcrumbs
+          items={[
+            { label: 'Projects', href: '/projects' },
+            { label: title || 'Project' }
+          ]}
+        />
+
         <Link
           href='/projects'
           className='mb-8 inline-flex items-center gap-2 text-sm font-light text-muted-foreground transition-colors hover:text-foreground'
