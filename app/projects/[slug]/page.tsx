@@ -107,7 +107,7 @@ export default async function Project({ params }: Props) {
     <section className='pb-24 pt-32'>
       {/* JSON-LD Structured Data */}
       <script
-        type="application/ld+json"
+        type='application/ld+json'
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
 

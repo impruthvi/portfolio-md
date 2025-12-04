@@ -42,7 +42,10 @@ const Footer = () => {
     <footer className='py-8'>
       <div className='container max-w-3xl'>
         <div className='md:flex md:items-center md:justify-between'>
-          <div className='flex justify-center space-x-6 md:order-2' aria-label='Social media links'>
+          <div
+            className='flex justify-center space-x-6 md:order-2'
+            aria-label='Social media links'
+          >
             {navigation.map(item => (
               <a
                 key={item.name}
@@ -57,9 +60,8 @@ const Footer = () => {
             ))}
           </div>
           <div className='mt-8 md:order-1 md:mt-0'>
-            <p className='text-muted-foreground text-center text-xs leading-5'>
-              &copy; {new Date().getFullYear()} impruthvi. All rights
-              reserved.
+            <p className='text-center text-xs leading-5 text-muted-foreground'>
+              &copy; {new Date().getFullYear()} impruthvi. All rights reserved.
             </p>
           </div>
         </div>

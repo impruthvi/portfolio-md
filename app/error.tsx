@@ -23,7 +23,8 @@ export default function Error({
           <div className='mb-8 text-6xl'>😵</div>
           <h1 className='title mb-4'>Oops! Something went wrong</h1>
           <p className='mb-8 text-muted-foreground'>
-            {error.message || "Don't worry, it's not your fault. Something broke on our end."}
+            {error.message ||
+              "Don't worry, it's not your fault. Something broke on our end."}
           </p>
           <div className='flex gap-4'>
             <Button onClick={reset} variant='default'>

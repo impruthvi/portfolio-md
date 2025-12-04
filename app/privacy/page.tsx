@@ -33,8 +33,8 @@ export default function PrivacyPolicy() {
           <h2>The Short Version (TL;DR)</h2>
           <p>
             I respect your privacy. Your contact information is only used to
-            respond to your message. I don&apos;t sell, share, or spam. That&apos;s it. 
-            Pretty simple, right? 🎉
+            respond to your message. I don&apos;t sell, share, or spam.
+            That&apos;s it. Pretty simple, right? 🎉
           </p>
 
           <h2>The Slightly Longer Version</h2>
@@ -49,9 +49,9 @@ export default function PrivacyPolicy() {
 
           <h3>What Do I Do With Your Information?</h3>
           <p>
-            I use your information solely to respond to your inquiry. That&apos;s
-            literally it. No marketing lists, no spam, no selling your data to
-            mysterious third parties who promise to make me rich.
+            I use your information solely to respond to your inquiry.
+            That&apos;s literally it. No marketing lists, no spam, no selling
+            your data to mysterious third parties who promise to make me rich.
           </p>
 
           <h3>Do I Use Cookies? 🍪</h3>
@@ -64,10 +64,10 @@ export default function PrivacyPolicy() {
 
           <h3>Analytics</h3>
           <p>
-            I use Vercel Analytics to understand how people use this site. It&apos;s
-            privacy-friendly and doesn&apos;t track you across the internet. It just
-            tells me things like &quot;20 people visited your blog today&quot; without
-            telling me who those people are.
+            I use Vercel Analytics to understand how people use this site.
+            It&apos;s privacy-friendly and doesn&apos;t track you across the
+            internet. It just tells me things like &quot;20 people visited your
+            blog today&quot; without telling me who those people are.
           </p>
 
           <h3>Third-Party Services</h3>
@@ -81,14 +81,17 @@ export default function PrivacyPolicy() {
             </li>
           </ul>
           <p>
-            These services have their own privacy policies, and they&apos;re pretty
-            good about privacy too.
+            These services have their own privacy policies, and they&apos;re
+            pretty good about privacy too.
           </p>
 
           <h3>Your Rights</h3>
           <p>You have the right to:</p>
           <ul>
-            <li>Ask me what data I have about you (probably just your email if you contacted me)</li>
+            <li>
+              Ask me what data I have about you (probably just your email if you
+              contacted me)
+            </li>
             <li>Ask me to delete your data</li>
             <li>Not contact me in the first place</li>
             <li>Use an ad blocker (I won&apos;t judge)</li>
@@ -96,23 +99,24 @@ export default function PrivacyPolicy() {
 
           <h3>Data Security</h3>
           <p>
-            Your contact form submissions are sent securely using industry-standard
-            encryption. I don&apos;t store your information in any database - it just
-            gets emailed to me and that&apos;s it.
+            Your contact form submissions are sent securely using
+            industry-standard encryption. I don&apos;t store your information in
+            any database - it just gets emailed to me and that&apos;s it.
           </p>
 
           <h3>Children&apos;s Privacy</h3>
           <p>
-            This site isn&apos;t intended for children under 13. If you&apos;re under 13
-            and reading this, congrats on your advanced reading skills! But
-            please don&apos;t use the contact form without a parent&apos;s permission.
+            This site isn&apos;t intended for children under 13. If you&apos;re
+            under 13 and reading this, congrats on your advanced reading skills!
+            But please don&apos;t use the contact form without a parent&apos;s
+            permission.
           </p>
 
           <h3>Changes to This Policy</h3>
           <p>
             I might update this privacy policy from time to time. If I make any
-            major changes, I&apos;ll update the date at the top. You know, like a
-            responsible adult.
+            major changes, I&apos;ll update the date at the top. You know, like
+            a responsible adult.
           </p>
 
           <h3>Questions?</h3>
@@ -128,10 +132,11 @@ export default function PrivacyPolicy() {
           <div className='mt-8 rounded-lg bg-muted p-6'>
             <h3 className='mt-0'>The Really Honest Version</h3>
             <p className='mb-0 text-sm'>
-              I&apos;m just one person trying to show off my work and maybe get some
-              freelance gigs. I&apos;m not interested in your data beyond being able
-              to respond if you reach out. I promise to treat your information
-              the way I&apos;d want mine treated - with respect and common sense.
+              I&apos;m just one person trying to show off my work and maybe get
+              some freelance gigs. I&apos;m not interested in your data beyond
+              being able to respond if you reach out. I promise to treat your
+              information the way I&apos;d want mine treated - with respect and
+              common sense.
             </p>
           </div>
         </div>

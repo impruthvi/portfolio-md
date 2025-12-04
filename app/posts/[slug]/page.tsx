@@ -110,7 +110,7 @@ const Post = async ({ params: { slug } }: Props) => {
     <section className='pb-24 pt-32'>
       {/* JSON-LD Structured Data */}
       <script
-        type="application/ld+json"
+        type='application/ld+json'
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
 

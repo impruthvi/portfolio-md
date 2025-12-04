@@ -24,14 +24,14 @@ export async function getProjectBySlug(slug: string): Promise<Project | null> {
     const filePath = path.join(rootDirectory, `${slug}.mdx`)
     const fileContent = fs.readFileSync(filePath, { encoding: 'utf8' })
     const { data, content } = matter(fileContent)
-    
+
     // Validate frontmatter
     const validatedData = MDXFrontmatterSchema.safeParse({ ...data, slug })
     if (!validatedData.success) {
       console.error(`Invalid frontmatter for ${slug}:`, validatedData.error)
       return null
     }
-    
+
     return { metadata: validatedData.data, content }
   } catch (error) {
     console.error(`Error reading project ${slug}:`, error)

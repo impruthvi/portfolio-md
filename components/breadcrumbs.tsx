@@ -17,7 +17,7 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
         <li>
           <Link
             href='/'
-            className='hover:text-foreground inline-flex items-center transition-colors'
+            className='inline-flex items-center transition-colors hover:text-foreground'
             aria-label='Home'
           >
             <Home className='h-4 w-4' />
@@ -29,7 +29,7 @@ export default function Breadcrumbs({ items }: BreadcrumbsProps) {
             {item.href && index < items.length - 1 ? (
               <Link
                 href={item.href}
-                className='hover:text-foreground transition-colors'
+                className='transition-colors hover:text-foreground'
               >
                 {item.label}
               </Link>

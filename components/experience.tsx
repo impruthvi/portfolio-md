@@ -14,12 +14,8 @@ export default function Experience() {
             <p className='text-lg font-medium text-foreground/90'>
               {item.position}
             </p>
-            <p className='text-md text-muted-foreground'>
-              {item.date}
-            </p>
-            <p className='text-base text-foreground/80'>
-              {item.description}
-            </p>
+            <p className='text-md text-muted-foreground'>{item.date}</p>
+            <p className='text-base text-foreground/80'>{item.description}</p>
           </div>
         ))}
       </div>

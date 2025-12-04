@@ -21,6 +21,6 @@ const nextConfig = {
   experimental: {
     optimizePackageImports: ['lucide-react', '@radix-ui/react-icons']
   }
-};
+}
 
-export default nextConfig;
+export default nextConfig

@@ -44,7 +44,10 @@ export default function MobileNav() {
 
           {/* Menu panel */}
           <div className='fixed inset-x-0 top-[72px] z-50 border-b bg-background p-6 shadow-lg'>
-            <nav className='flex flex-col space-y-4' aria-label='Mobile navigation'>
+            <nav
+              className='flex flex-col space-y-4'
+              aria-label='Mobile navigation'
+            >
               {navigation.map(item => (
                 <Link
                   key={item.name}

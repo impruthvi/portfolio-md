@@ -126,14 +126,14 @@ export default function RootLayout({
         </a>
 
         <Script
-          src="https://voxa-widget.vercel.app/widget.js"
-          data-organization-id="org_32vebynMvDQfCJBEzu7CtfAmYWW"
-          strategy="afterInteractive"
+          src='https://voxa-widget.vercel.app/widget.js'
+          data-organization-id='org_32vebynMvDQfCJBEzu7CtfAmYWW'
+          strategy='afterInteractive'
         />
 
         {/* JSON-LD Structured Data */}
         <script
-          type="application/ld+json"
+          type='application/ld+json'
           dangerouslySetInnerHTML={{
             __html: JSON.stringify(getPersonStructuredData())
           }}
