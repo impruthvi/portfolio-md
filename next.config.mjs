@@ -11,8 +11,6 @@ const nextConfig = {
   },
   // Enable compression
   compress: true,
-  // Optimize production builds
-  swcMinify: true,
   // Strict mode for better debugging
   reactStrictMode: true,
   // Power settings for better performance

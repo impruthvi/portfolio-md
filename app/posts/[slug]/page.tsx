@@ -13,12 +13,13 @@ import { notFound } from 'next/navigation'
 import React from 'react'
 
 type Props = {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const post = await getPostBySlug(params.slug)
+  const { slug } = await params
+  const post = await getPostBySlug(slug)
 
   if (!post) {
     return {
@@ -61,7 +62,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       images: image ? [image] : []
     },
     alternates: {
-      canonical: `https://impruthvi.me/posts/${params.slug}`
+      canonical: `https://impruthvi.me/posts/${slug}`
     },
     keywords: [
       'Pruthvisinh Rajput blog',
@@ -84,7 +85,8 @@ export async function generateStaticParams() {
   return slugs
 }
 
-const Post = async ({ params: { slug } }: Props) => {
+const Post = async ({ params }: Props) => {
+  const { slug } = await params
   const post = await getPostBySlug(slug)
 
   if (!post) {

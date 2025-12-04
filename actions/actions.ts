@@ -24,7 +24,7 @@ export async function sendEmail(data: ContactFormInputs) {
       replyTo: email,
       subject: `New Contact Form Submission from ${name}`,
       text: `Name: ${name}\nEmail: ${email}\nMessage: ${message}`,
-      react: ContactFormEmail({ name, email, message })
+      react: ContactFormEmail({ name, email, message }) as React.ReactElement
     })
 
     if (!data || error) {

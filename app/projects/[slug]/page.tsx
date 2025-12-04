@@ -11,12 +11,13 @@ import { getProjectBySlug, getProjects } from '@/actions/projects'
 import { notFound } from 'next/navigation'
 
 type Props = {
-  params: {
+  params: Promise<{
     slug: string
-  }
+  }>
 }
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
-  const project = await getProjectBySlug(params.slug)
+  const { slug } = await params
+  const project = await getProjectBySlug(slug)
 
   if (!project) {
     return {
@@ -58,7 +59,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       images: image ? [image] : []
     },
     alternates: {
-      canonical: `https://impruthvi.me/projects/${params.slug}`
+      canonical: `https://impruthvi.me/projects/${slug}`
     },
     keywords: [
       'Pruthvisinh Rajput projects',
@@ -84,7 +85,7 @@ export async function generateStaticParams() {
 }
 
 export default async function Project({ params }: Props) {
-  const { slug } = params
+  const { slug } = await params
   const project = await getProjectBySlug(slug)
 
   if (!project) {
