@@ -1,4 +1,5 @@
 import { JSX, SVGProps } from 'react'
+import { RssIcon } from 'lucide-react'
 
 const navigation = [
   {
@@ -34,6 +35,11 @@ const navigation = [
         />
       </svg>
     )
+  },
+  {
+    name: 'RSS Feed',
+    href: '/rss.xml',
+    icon: RssIcon
   }
 ]
 
