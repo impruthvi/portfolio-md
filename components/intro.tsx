@@ -7,11 +7,14 @@ export default function Intro() {
       <div className='mt-2 flex-1 md:mt-0'>
         <h1 className='title no-underline'>Hey, I&#39;m Pruthvisinh Rajput.</h1>
         <p className='mt-3 font-light text-muted-foreground'>
-          I am a dedicated Software Developer with expertise in building web
-          applications using Next.js, Node.js, React.js, Laravel, PHP, and a
-          range of other modern libraries and frameworks. Additionally, I
-          possess strong knowledge of AWS and server management, enabling me to
-          deliver scalable and efficient solutions.
+          Full-stack developer with 4+ years of experience building scalable
+          web applications using React, Next.js, and Node.js. Specialized in
+          modern JavaScript frameworks, cloud architecture (AWS), and
+          performance optimization. Proven track record of delivering
+          high-quality features that improve user experience and drive business
+          growth. Currently contributing to enterprise solutions at Vivansh
+          Infotech while continuously expanding expertise in modern development
+          practices.
         </p>
       </div>
       <div className='relative'>
