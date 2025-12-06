@@ -119,4 +119,15 @@
   .prose code span {
     @apply font-medium;
   }
+
+  /* Print styles for resume page */
+  @media print {
+    header,
+    footer {
+      display: none !important;
+    }
+    .container {
+      max-width: 100% !important;
+    }
+  }
 }
