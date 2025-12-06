@@ -23,14 +23,14 @@ export default function ResumePage() {
               Full-Stack Software Engineer
             </p>
           </div>
-          <Link
+          <a
             href='/Pruthvisinh_Rajput.pdf'
-            target='_blank'
+            download='Pruthvisinh_Rajput_Resume.pdf'
             className='flex items-center gap-2 rounded-lg border border-border bg-secondary px-4 py-2 text-sm font-medium transition-colors hover:bg-secondary/80'
           >
             <FileDown className='h-4 w-4' />
             Download PDF
-          </Link>
+          </a>
         </div>
 
         {/* Contact Info */}
