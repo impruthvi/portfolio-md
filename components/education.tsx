@@ -1,16 +1,17 @@
 import { educationData } from '@/lib/education-data'
+import FadeIn from './fade-in'
 
 export default function Education() {
   return (
     <section className='pb-24'>
       <div>
-        <h2 className='title mb-12'>Education</h2>
+        <FadeIn>
+          <h2 className='title mb-12'>Education</h2>
+        </FadeIn>
         <div className='space-y-6'>
           {educationData.map((edu, index) => (
-            <div
-              key={index}
-              className='rounded-lg border border-border bg-card p-6'
-            >
+            <FadeIn key={index} delay={index * 100}>
+              <div className='rounded-lg border border-border bg-card p-6'>
               <div className='flex flex-col gap-2 md:flex-row md:items-center md:justify-between'>
                 <div className='flex-1'>
                   <h3 className='text-lg font-semibold'>{edu.degree}</h3>
@@ -30,6 +31,7 @@ export default function Education() {
                 </p>
               )}
             </div>
+            </FadeIn>
           ))}
         </div>
       </div>
