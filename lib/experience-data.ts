@@ -11,14 +11,14 @@ export const experienceData: ExperienceItem[] = [
     position: 'Software Engineer',
     date: 'Jun 2025 – Present',
     description:
-      'Leading full-stack development of enterprise web applications using Next.js 15, React 19, and TypeScript. Architecting scalable backend solutions with Node.js and Laravel, serving 10K+ active users. Implementing CI/CD pipelines and AWS infrastructure optimization, reducing deployment time by 50%. Collaborating with cross-functional teams to deliver high-impact features while maintaining 95%+ code coverage through comprehensive testing.'
+      'Architecting and developing scalable backend systems using Node.js, Laravel, and PHP, serving 10K+ active users. Designing RESTful APIs and optimizing database schemas (MySQL, PostgreSQL) for high-performance data processing. Implementing AWS infrastructure (EC2, S3, Lambda, CloudFormation) and CI/CD pipelines, reducing deployment time by 50%. Contributing to frontend development with Next.js 15 and React 19 when needed, maintaining 95%+ code coverage through comprehensive testing.'
   },
   {
     company: 'Yudiz Solution',
     position: 'Back-End Developer',
     date: 'Jan 2022 – May 2025',
     description:
-      'Developed and maintained 15+ production web applications using Laravel, PHP, and React.js, serving 50K+ monthly active users. Optimized database queries and API performance, reducing response times by 60% (from 800ms to 320ms average). Built RESTful APIs and integrated third-party services including payment gateways and cloud storage. Implemented automated testing with PHPUnit and Jest, achieving 85% code coverage. Mentored 3 junior developers in best practices and modern development workflows.'
+      'Developed and maintained backend systems for 15+ production applications using Laravel, PHP, and MySQL/PostgreSQL, serving 50K+ monthly active users. Designed and built RESTful APIs, microservices architecture, and database schemas. Optimized complex database queries and API performance, reducing response times by 60% (from 800ms to 320ms average). Integrated third-party services including payment gateways (Stripe, PayPal), AWS S3, and authentication systems. Implemented automated testing with PHPUnit achieving 85% backend code coverage. Collaborated with frontend teams and mentored 3 junior developers.'
   },
   {
     company: 'Adore India',

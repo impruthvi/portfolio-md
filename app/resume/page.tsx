@@ -66,14 +66,14 @@ export default function ResumePage() {
         <section className='mb-12'>
           <h2 className='mb-4 text-2xl font-bold'>Professional Summary</h2>
           <p className='text-muted-foreground'>
-            Full-stack developer with 4+ years of experience building scalable
-            web applications using React, Next.js, and Node.js. Specialized in
-            modern JavaScript frameworks, cloud architecture (AWS), and
-            performance optimization. Proven track record of delivering
-            high-quality features that improve user experience and drive
-            business growth. Currently contributing to enterprise solutions at
-            Vivansh Infotech while continuously expanding expertise in modern
-            development practices.
+            Backend-focused full-stack developer with 4+ years of experience
+            building robust server-side applications and APIs using PHP,
+            Laravel, Node.js, and modern databases. Specialized in scalable
+            architecture, database optimization, API design, and cloud
+            infrastructure (AWS). Proficient in frontend technologies including
+            React, Next.js, and Vue.js to deliver complete solutions. Proven
+            track record of optimizing performance and building high-impact
+            features for enterprise applications.
           </p>
         </section>
 
