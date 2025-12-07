@@ -161,7 +161,7 @@ export default function ResumePage() {
                       key={skillIndex}
                       className='rounded bg-secondary px-2 py-1 text-xs'
                     >
-                      {skill}
+                      {skill.name}
                     </span>
                   ))}
                 </div>

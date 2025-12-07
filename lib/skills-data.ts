@@ -1,62 +1,70 @@
+export interface Skill {
+  name: string
+  level: 'expert' | 'advanced' | 'intermediate'
+}
+
 export interface SkillCategory {
   category: string
-  skills: string[]
+  skills: Skill[]
 }
 
 export const skillsData: SkillCategory[] = [
   {
-    category: 'Frontend',
+    category: 'Backend',
     skills: [
-      'React',
-      'Next.js',
-      'Vue.js',
-      'TypeScript',
-      'JavaScript',
-      'TailwindCSS',
-      'HTML5',
-      'CSS3'
+      { name: 'PHP', level: 'expert' },
+      { name: 'Laravel', level: 'expert' },
+      { name: 'Node.js', level: 'advanced' },
+      { name: 'MySQL', level: 'expert' },
+      { name: 'PostgreSQL', level: 'advanced' },
+      { name: 'REST APIs', level: 'expert' },
+      { name: 'Express.js', level: 'advanced' },
+      { name: 'GraphQL', level: 'intermediate' }
     ]
   },
   {
-    category: 'Backend',
-    skills: ['Node.js', 'PHP', 'Laravel', 'Express.js', 'REST APIs', 'GraphQL']
+    category: 'Frontend',
+    skills: [
+      { name: 'React', level: 'advanced' },
+      { name: 'Next.js', level: 'advanced' },
+      { name: 'TypeScript', level: 'advanced' },
+      { name: 'JavaScript', level: 'expert' },
+      { name: 'TailwindCSS', level: 'advanced' },
+      { name: 'Vue.js', level: 'intermediate' },
+      { name: 'HTML5', level: 'expert' },
+      { name: 'CSS3', level: 'advanced' }
+    ]
   },
   {
     category: 'Databases',
-    skills: ['MySQL', 'PostgreSQL', 'MongoDB', 'Redis', 'Prisma']
+    skills: [
+      { name: 'MySQL', level: 'expert' },
+      { name: 'PostgreSQL', level: 'advanced' },
+      { name: 'MongoDB', level: 'advanced' },
+      { name: 'Redis', level: 'intermediate' },
+      { name: 'Prisma', level: 'intermediate' }
+    ]
   },
   {
     category: 'Cloud & DevOps',
     skills: [
-      'AWS (EC2, S3, Lambda, CloudFormation)',
-      'Docker',
-      'CI/CD',
-      'Git',
-      'GitHub Actions',
-      'Vercel'
+      { name: 'AWS (EC2, S3, Lambda)', level: 'advanced' },
+      { name: 'Docker', level: 'intermediate' },
+      { name: 'CI/CD', level: 'advanced' },
+      { name: 'Git', level: 'expert' },
+      { name: 'GitHub Actions', level: 'intermediate' },
+      { name: 'CloudFormation', level: 'intermediate' }
     ]
   },
   {
     category: 'Tools & Testing',
     skills: [
-      'Vitest',
-      'Jest',
-      'ESLint',
-      'Prettier',
-      'VS Code',
-      'Postman',
-      'npm/bun'
-    ]
-  },
-  {
-    category: 'Other',
-    skills: [
-      'MDX',
-      'Socket.io',
-      'Zod',
-      'React Hook Form',
-      'Server Actions',
-      'Responsive Design'
+      { name: 'Vitest', level: 'advanced' },
+      { name: 'Jest', level: 'advanced' },
+      { name: 'PHPUnit', level: 'advanced' },
+      { name: 'ESLint', level: 'advanced' },
+      { name: 'Prettier', level: 'advanced' },
+      { name: 'Postman', level: 'advanced' }
     ]
   }
 ]
