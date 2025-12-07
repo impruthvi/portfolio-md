@@ -41,19 +41,19 @@ export const skillsData: SkillCategory[] = [
       { name: 'MySQL', level: 'expert' },
       { name: 'PostgreSQL', level: 'advanced' },
       { name: 'MongoDB', level: 'advanced' },
-      { name: 'Redis', level: 'intermediate' },
-      { name: 'Prisma', level: 'intermediate' }
+      { name: 'Redis', level: 'advanced' },
+      { name: 'Prisma', level: 'advanced' }
     ]
   },
   {
     category: 'Cloud & DevOps',
     skills: [
       { name: 'AWS (EC2, S3, Lambda)', level: 'advanced' },
-      { name: 'Docker', level: 'intermediate' },
+      { name: 'Docker', level: 'advanced' },
       { name: 'CI/CD', level: 'advanced' },
       { name: 'Git', level: 'expert' },
-      { name: 'GitHub Actions', level: 'intermediate' },
-      { name: 'CloudFormation', level: 'intermediate' }
+      { name: 'GitHub Actions', level: 'advanced' },
+      { name: 'CloudFormation', level: 'advanced' }
     ]
   },
   {
