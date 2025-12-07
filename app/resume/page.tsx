@@ -8,12 +8,83 @@ import { educationData } from '@/lib/education-data'
 export const metadata: Metadata = {
   title: 'Resume - Pruthvisinh Rajput',
   description:
-    'Full-stack developer with 4+ years of experience building scalable web applications using React, Next.js, and Node.js.'
+    'Backend-focused full-stack developer with 4+ years of experience in PHP, Laravel, Node.js, and modern databases. Specialized in API design, database optimization, and cloud infrastructure.'
 }
 
 export default function ResumePage() {
+  const baseUrl = process.env.NEXT_PUBLIC_URL || 'https://impruthvi.me'
+
+  // Structured data for SEO
+  const personSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    name: 'Pruthvisinh Rajput',
+    alternateName: 'Pruthvi Rajput',
+    url: baseUrl,
+    image: `${baseUrl}/images/authors/impruthvi.jpg`,
+    jobTitle: 'Software Engineer',
+    worksFor: {
+      '@type': 'Organization',
+      name: 'Vivansh Infotech'
+    },
+    alumniOf: {
+      '@type': 'EducationalOrganization',
+      name: 'Gujarat Technological University',
+      address: {
+        '@type': 'PostalAddress',
+        addressLocality: 'Mehsana',
+        addressRegion: 'Gujarat',
+        addressCountry: 'IN'
+      }
+    },
+    knowsAbout: [
+      'PHP',
+      'Laravel',
+      'Node.js',
+      'MySQL',
+      'PostgreSQL',
+      'MongoDB',
+      'AWS',
+      'Docker',
+      'React',
+      'Next.js',
+      'Vue.js',
+      'TypeScript',
+      'RESTful APIs',
+      'Database Optimization',
+      'Cloud Architecture'
+    ],
+    sameAs: [
+      'https://github.com/impruthvi',
+      'https://www.linkedin.com/in/pruthvisinh-rajput-9a4711194/',
+      'https://twitter.com/impruthvi13'
+    ]
+  }
+
+  const profilePageSchema = {
+    '@context': 'https://schema.org',
+    '@type': 'ProfilePage',
+    mainEntity: {
+      '@type': 'Person',
+      name: 'Pruthvisinh Rajput',
+      description:
+        'Backend-focused full-stack developer with 4+ years of experience in PHP, Laravel, Node.js, and modern databases.'
+    }
+  }
+
   return (
-    <section className='pb-24 pt-40'>
+    <>
+      {/* Structured Data */}
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(personSchema) }}
+      />
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(profilePageSchema) }}
+      />
+
+      <section className='pb-24 pt-40'>
       <div className='container max-w-4xl'>
         {/* Header with download button */}
         <div className='mb-12 flex flex-col items-start justify-between gap-4 md:flex-row md:items-center'>
@@ -58,7 +129,7 @@ export default function ResumePage() {
             className='flex items-center gap-2 hover:text-foreground'
           >
             <Linkedin className='h-4 w-4' />
-            linkedin.com/in/impruthvi
+            linkedin.com/in/pruthvisinh-rajput
           </a>
         </div>
 
@@ -155,5 +226,6 @@ export default function ResumePage() {
         </section>
       </div>
     </section>
+    </>
   )
 }
