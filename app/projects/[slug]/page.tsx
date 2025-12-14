@@ -129,12 +129,14 @@ export default async function Project({ params }: Props) {
         </Link>
 
         {image && (
-          <div className='relative mb-6 h-96 w-full overflow-hidden rounded-lg'>
+          <div className='relative mb-6 h-96 w-full overflow-hidden rounded-lg bg-muted'>
             <Image
               src={image}
               alt={title || ''}
               className='object-cover'
               fill
+              sizes='(max-width: 768px) 100vw, 768px'
+              priority
             />
           </div>
         )}
