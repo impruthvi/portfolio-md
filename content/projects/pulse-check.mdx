@@ -1,0 +1,348 @@
+---
+title: PulseCheck
+summary: A distributed URL monitoring and health-checking system built with Go
+  microservices, gRPC, and OpenTelemetry for real-time observability.
+image: /images/projects/pulsecheck.png
+author: 'Pruthvisinh Rajput'
+publishedAt: '2025-12-14'
+---
+
+PulseCheck is a production-ready distributed monitoring system designed to track
+website and API availability in real-time. Built with modern microservices
+architecture using Go and gRPC, it provides millisecond-precision health checks,
+persistent monitoring configurations, and comprehensive distributed tracing
+capabilities with OpenTelemetry.
+
+[APIs Repository](https://github.com/impruthvi/pulse-check-apis) |
+[Checker Service](https://github.com/impruthvi/pulse-check-checker) |
+[Monitor Service](https://github.com/impruthvi/pulse-check-monitor)
+
+## Features
+
+- **Microservices Architecture**: Clean separation with independent, scalable
+  services.
+- **Real-time Health Checks**: On-demand URL monitoring with millisecond
+  response time tracking.
+- **gRPC Communication**: High-performance, type-safe inter-service
+  communication.
+- **Persistent Storage**: PostgreSQL-backed monitor configurations with GORM.
+- **Distributed Tracing**: Full observability with OpenTelemetry and Jaeger
+  integration.
+- **Docker Ready**: Production-ready containerization with multi-stage builds.
+- **Status Tracking**: Intelligent UP/DOWN/PENDING status management.
+- **Developer Friendly**: Comprehensive testing tools with grpcurl examples.
+- **Auto-Migration**: Database schema auto-migration on startup.
+- **Timeout Protection**: Configurable timeouts prevent hanging requests.
+
+## Key Features
+
+- **🏗️ Microservices Design**: Three independent services (APIs, Checker,
+  Monitor) for maximum scalability.
+- **⚡ gRPC Performance**: Protocol Buffers for efficient, type-safe
+  communication.
+- **🔍 Real-time Monitoring**: Instant health checks with sub-second response
+  times.
+- **💾 PostgreSQL Storage**: Reliable persistence with automatic schema
+  management via GORM.
+- **📊 OpenTelemetry Integration**: End-to-end distributed tracing across all
+  services.
+- **🐳 Docker Containerization**: Alpine-based images for lightweight
+  deployment.
+- **🎯 Intelligent Status**: Status validation (200-399 = UP, otherwise DOWN).
+- **⏱️ Response Metrics**: Precise millisecond-level response time measurement.
+- **🔗 Service Discovery**: Configurable service URLs for flexible deployment.
+- **📝 Auto-generated Code**: Proto-based code generation for consistency.
+- **🧪 Testing Tools**: Built-in grpcurl examples for easy API testing.
+- **🔐 HTTPS Support**: Full support for secure endpoint monitoring.
+
+## Architecture
+
+PulseCheck follows a distributed microservices architecture with three main components:
+
+```
+┌─────────────────┐
+│ Client App      │
+└────────┬────────┘
+         │
+         ├─────────────────────────────────────┐
+         │                                     │
+         ▼                                     ▼
+┌────────────────────────┐          ┌──────────────────────────┐
+│ Monitor Service :50051 │          │ Checker Service :50052   │
+├────────────────────────┤          ├──────────────────────────┤
+│ • Monitor gRPC API     │─────────▶│ • Checker gRPC API       │
+│ • Business Logic       │          │ • Health Check Logic     │
+│ • PostgreSQL DB        │          │ • HTTP Client            │
+└────────────────────────┘          └──────────┬───────────────┘
+         │                                     │
+         │                                     ▼
+         │                          ┌─────────────────────┐
+         │                          │ Target URLs         │
+         │                          │ (HTTP/HTTPS)        │
+         │                          └─────────────────────┘
+         │
+         ▼
+┌────────────────────────┐          ┌──────────────────────────┐
+│ Shared APIs            │          │ Jaeger/OTLP Collector    │
+│ (Protocol Buffers)     │◀─────────│ (Distributed Tracing)    │
+└────────────────────────┘          └──────────────────────────┘
+
+Flow:
+1. Client → Monitor Service (CreateMonitor/GetMonitor)
+2. Monitor Service → Checker Service (CheckURL)
+3. Checker Service → Target URLs (HTTP GET)
+4. All services → Jaeger (Traces)
+```
+
+### Component Overview
+
+**1. pulse-check-apis - Shared API Definitions**
+
+- Central repository for gRPC/Protobuf definitions.
+- Auto-generated Go code for type safety.
+- MonitorService and CheckerService APIs.
+
+**2. checkerd - Checker Service (Port: 50052)**
+
+- Performs HTTP/HTTPS health checks.
+- Measures response times with millisecond precision.
+- Validates status codes and determines UP/DOWN state.
+- Exports distributed traces for every check.
+
+**3. monitord - Monitor Service (Port: 50051)**
+
+- Manages monitor configurations.
+- Orchestrates health checks via Checker Service.
+- Persists monitor data in PostgreSQL.
+- Provides monitoring status and history.
+
+## Technologies Used
+
+- **Go 1.25+**: Core programming language for high-performance microservices.
+- **gRPC**: High-performance RPC framework with Protocol Buffers (proto3).
+- **PostgreSQL**: Robust relational database for monitor configurations.
+- **GORM**: Go ORM with auto-migration capabilities.
+- **Docker**: Containerization with Alpine Linux for lightweight deployment.
+- **OpenTelemetry**: Distributed tracing with OTLP protocol.
+- **Jaeger**: Trace visualization and monitoring.
+- **Key Libraries**: grpc, protobuf, gorm, opentelemetry, uuid, godotenv.
+
+## Getting Started
+
+To set up PulseCheck locally, follow these steps:
+
+**Prerequisites:** Go 1.25+, PostgreSQL, Docker (optional)
+
+1. **Clone all three repositories:**
+
+   ```bash
+   mkdir pulsecheck && cd pulsecheck
+   git clone https://github.com/impruthvi/pulse-check-apis.git apis
+   git clone https://github.com/impruthvi/pulse-check-checker.git checkerd
+   git clone https://github.com/impruthvi/pulse-check-monitor.git monitord
+   ```
+
+2. **Set up PostgreSQL database:**
+
+   ```bash
+   createdb pulsecheck
+   ```
+
+3. **Configure environment variables:**
+
+   ```bash
+   cd monitord
+   cp .env.example .env
+   ```
+
+   Edit `.env` with your settings:
+
+   ```env
+   DB_URL=postgresql://user:password@localhost:5432/pulsecheck?sslmode=disable
+   CHECKER_SERVICE_URL=localhost:50052
+   OTLP_ENDPOINT=localhost:4317
+   ```
+
+4. **Start the services:**
+
+   ```bash
+   # Terminal 1: Checker Service
+   cd checkerd
+   go mod download
+   go run main.go
+
+   # Terminal 2: Monitor Service
+   cd monitord
+   go mod download
+   go run main.go
+   ```
+
+5. **Optional: Run Jaeger for tracing:**
+
+   ```bash
+   docker run -d --name jaeger \
+     -e COLLECTOR_OTLP_ENABLED=true \
+     -p 16686:16686 -p 4317:4317 \
+     jaegertracing/all-in-one:latest
+   ```
+
+   Access Jaeger UI at `http://localhost:16686`.
+
+## Usage
+
+### Testing with grpcurl
+
+**Create a new monitor:**
+```bash
+grpcurl -plaintext \
+  -d '{
+    "url": "https://example.com",
+    "interval_seconds": 60
+  }' \
+  -import-path ./apis \
+  -proto monitor/v1/monitor.proto \
+  localhost:50051 \
+  monitor.v1.MonitorService/CreateMonitor
+
+# Response:
+# {
+#   "monitor": {
+#     "id": "550e8400-e29b-41d4-a716-446655440000",
+#     "url": "https://example.com",
+#     "intervalSeconds": 60,
+#     "status": "PENDING"
+#   }
+# }
+```
+
+**Get monitor status (performs real-time check):**
+```bash
+grpcurl -plaintext \
+  -d '{
+    "id": "550e8400-e29b-41d4-a716-446655440000"
+  }' \
+  -import-path ./apis \
+  -proto monitor/v1/monitor.proto \
+  localhost:50051 \
+  monitor.v1.MonitorService/GetMonitor
+
+# Response:
+# {
+#   "monitor": {
+#     "id": "550e8400-e29b-41d4-a716-446655440000",
+#     "url": "https://example.com",
+#     "intervalSeconds": 60,
+#     "status": "UP",
+#     "lastCheckedAt": "2024-12-14T10:30:45Z",
+#     "responseTimeMs": "145"
+#   }
+# }
+```
+
+**Direct health check (Checker Service):**
+```bash
+grpcurl -plaintext \
+  -d '{
+    "monitor_id": "550e8400-e29b-41d4-a716-446655440000",
+    "url": "https://google.com"
+  }' \
+  -import-path ./apis \
+  -proto checker/v1/checker.proto \
+  localhost:50052 \
+  checker.v1.CheckerService/CheckURL
+
+# Response:
+# {
+#   "monitorId": "550e8400-e29b-41d4-a716-446655440000",
+#   "url": "https://google.com",
+#   "status": "UP",
+#   "responseTimeMs": "87",
+#   "statusCode": 200,
+#   "checkedAt": "2024-12-14T10:31:20Z"
+# }
+```
+
+### Viewing Distributed Traces
+
+1. Open Jaeger UI at `http://localhost:16686`
+2. Select service: `monitord` or `checkerd`
+3. Click "Find Traces" to see recent requests
+4. View end-to-end traces showing:
+   - gRPC server spans
+   - Service-to-service calls (monitord → checkerd)
+   - Database queries
+   - HTTP health check operations
+   - Response times and status codes
+
+## How It Works
+
+1. **Create Monitor**: Client calls `monitord.CreateMonitor(url, interval)` to
+   create a monitor record with "PENDING" status and returns a unique UUID.
+
+2. **Get Monitor Status**: Client calls `monitord.GetMonitor(id)` which
+   retrieves the configuration, performs a real-time health check via
+   `checkerd.CheckURL()`, and returns the updated status.
+
+3. **Health Check**: The checker service makes an HTTP GET request to the
+   target URL, measures response time in milliseconds, evaluates status
+   (200-399 = UP), and exports traces.
+
+## Observability
+
+PulseCheck includes comprehensive distributed tracing with automatic gRPC
+instrumentation, service-to-service tracking, database query tracing, and custom
+spans for business logic. All traces include rich attributes like monitor IDs,
+URLs, status codes, and response times.
+
+View traces in Jaeger UI at `http://localhost:16686` to see end-to-end request
+flows, performance metrics, and error tracking across all services.
+
+## Docker Deployment
+
+Build and run with Docker:
+
+```bash
+# Build Checker Service
+cd checkerd
+docker build -t pulsecheck-checker .
+docker run -p 50052:50052 pulsecheck-checker
+
+# Build Monitor Service
+cd monitord
+docker build -t pulsecheck-monitor .
+docker run -p 50051:50051 \
+  -e DB_URL=postgresql://user:password@host.docker.internal:5432/pulsecheck \
+  -e CHECKER_SERVICE_URL=host.docker.internal:50052 \
+  pulsecheck-monitor
+```
+
+For production deployment, use Docker Compose with PostgreSQL, both services,
+and Jaeger for a complete monitoring stack.
+
+## Contributing
+
+We welcome contributions to enhance PulseCheck. Here's how you can contribute:
+
+1. Fork the repository (choose apis, checkerd, or monitord).
+2. Create a feature branch (`git checkout -b feature-name`).
+3. Make your changes with tests.
+4. Commit your changes (`git commit -m "Feature description"`).
+5. Push to your fork (`git push origin feature-name`).
+6. Open a pull request for review.
+
+## License
+
+This project is licensed under the
+[MIT License](https://opensource.org/licenses/MIT). Feel free to use and modify
+as per your needs.
+
+## Conclusion
+
+PulseCheck is a production-ready monitoring solution that demonstrates modern
+microservices architecture principles. Built with Go and gRPC, it provides
+high-performance health checking capabilities with comprehensive observability
+through OpenTelemetry integration.
+
+Whether you're monitoring a handful of endpoints or building a large-scale
+monitoring platform, PulseCheck offers a solid foundation with its clean
+architecture, distributed tracing, and scalable design.
