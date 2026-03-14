@@ -128,12 +128,6 @@ export default function RootLayout({
           Skip to main content
         </a>
 
-        <Script
-          src='https://voxa-widget.vercel.app/widget.js'
-          data-organization-id='org_32vebynMvDQfCJBEzu7CtfAmYWW'
-          strategy='afterInteractive'
-        />
-
         {/* JSON-LD Structured Data */}
         <script
           type='application/ld+json'
