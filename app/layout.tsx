@@ -9,7 +9,6 @@ import './globals.css'
 import Providers from '@/providers'
 import Header from '@/components/header'
 import Footer from '@/components/footer'
-import Script from 'next/script'
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-sans' })
 const playfair = Playfair_Display({
