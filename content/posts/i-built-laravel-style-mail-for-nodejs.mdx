@@ -1,0 +1,249 @@
+---
+title: 'I Got Tired of Rewriting My Email Code Every Time I Switched Providers'
+summary: 'Every time I switched email providers in Node.js, I had to rewrite transport code, update configs, and pray nothing broke. So I built laramail — Laravel-style email for Node.js with one-env-var provider switching and Mail.fake() testing.'
+image: /images/posts/laramail.png
+author: 'Pruthvisinh Rajput'
+publishedAt: '2026-03-28'
+---
+
+I've hit this pain three times across three different Node.js projects.
+
+You're using SMTP in dev, SendGrid in production, and one day you decide to try Resend because you've heard great things. So you go into your code, swap out the nodemailer transport, install a different package, rewrite the config shape, hunt down every place you referenced `transporter.sendMail()`, update environment variables, and test everything again from scratch.
+
+It takes half a day. It shouldn't.
+
+Laravel solved this problem years ago with a clean abstraction: you configure your providers, and your application code never knows which one is active. You switch by changing `MAIL_MAILER=resend` in your `.env`. That's it.
+
+I wanted that in Node.js. It didn't exist. So I built it.
+
+---
+
+## Introducing laramail
+
+```bash
+npm install laramail
+```
+
+laramail is a Laravel-style mail system for Node.js and TypeScript. Same API across every provider. Switch providers with one config change. Test email sending without mocks.
+
+---
+
+## The Core Problem: Provider Lock-in
+
+Here's what sending an email with nodemailer + Resend looks like today:
+
+```typescript
+// nodemailer + resend transport
+import nodemailer from 'nodemailer';
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
+// Wait — you can't use Resend with nodemailer directly.
+// You need a separate Resend SDK call.
+await resend.emails.send({
+  from: 'noreply@example.com',
+  to: 'user@example.com',
+  subject: 'Welcome!',
+  html: '<h1>Hello!</h1>',
+});
+```
+
+Now you want to switch to SendGrid:
+
+```typescript
+// Completely different package, completely different API
+import sgMail from '@sendgrid/mail';
+sgMail.setApiKey(process.env.SENDGRID_API_KEY);
+await sgMail.send({
+  to: 'user@example.com',
+  from: 'noreply@example.com',
+  subject: 'Welcome!',
+  html: '<h1>Hello!</h1>',
+});
+```
+
+Every provider has a different package, a different API shape, a different config format. Switching requires code changes everywhere you send email.
+
+---
+
+## The laramail Way
+
+Configure your providers once:
+
+```typescript
+import { Mail } from 'laramail';
+
+Mail.configure({
+  default: process.env.MAIL_DRIVER, // 'smtp' | 'sendgrid' | 'resend' | 'ses' | 'mailgun' | 'postmark'
+  from: { address: 'noreply@example.com', name: 'My App' },
+  mailers: {
+    smtp: {
+      driver: 'smtp',
+      host: process.env.SMTP_HOST,
+      port: 587,
+      auth: { user: process.env.SMTP_USER, pass: process.env.SMTP_PASS },
+    },
+    resend: {
+      driver: 'resend',
+      apiKey: process.env.RESEND_API_KEY,
+    },
+    sendgrid: {
+      driver: 'sendgrid',
+      apiKey: process.env.SENDGRID_API_KEY,
+    },
+  },
+});
+```
+
+Send email — the same code, always:
+
+```typescript
+await Mail.to('user@example.com').send(new WelcomeEmail(user));
+```
+
+Switch from Resend to SendGrid: change one line in your `.env`.
+
+```bash
+# Before
+MAIL_DRIVER=resend
+
+# After
+MAIL_DRIVER=sendgrid
+```
+
+No code changes. Zero.
+
+---
+
+## Mailable Classes
+
+Instead of inline send calls, laramail gives you Mailable classes — self-contained, reusable, testable email objects:
+
+```typescript
+import { Mailable } from 'laramail';
+
+class WelcomeEmail extends Mailable {
+  constructor(private user: { name: string; email: string }) {
+    super();
+  }
+
+  build() {
+    return this
+      .subject(`Welcome, ${this.user.name}!`)
+      .html(`
+        <h1>Hello ${this.user.name}!</h1>
+        <p>Thanks for joining. Your account is ready.</p>
+      `);
+  }
+}
+
+// Send it
+await Mail.to(user.email).send(new WelcomeEmail(user));
+```
+
+Your email logic lives in one place. You can test it, reuse it, and change its behavior without touching the call sites.
+
+---
+
+## Testing with Mail.fake()
+
+This is the thing I'm most proud of.
+
+Testing email sending in Node.js is usually painful. You either hit a real SMTP server, set up a nodemailer mock, or skip the test entirely. None of these feel right.
+
+`Mail.fake()` intercepts all outgoing email and gives you Laravel-style assertions:
+
+```typescript
+import { Mail } from 'laramail';
+import { WelcomeEmail } from './emails/WelcomeEmail';
+
+describe('Registration', () => {
+  beforeEach(() => Mail.fake());
+  afterEach(() => Mail.restore());
+
+  it('sends a welcome email on signup', async () => {
+    await registerUser({ name: 'John', email: 'john@example.com' });
+
+    // Assert the email was sent
+    Mail.assertSent(WelcomeEmail);
+
+    // Assert it went to the right address
+    Mail.assertSent(WelcomeEmail, (mail) =>
+      mail.hasTo('john@example.com')
+    );
+
+    // Assert subject
+    Mail.assertSent(WelcomeEmail, (mail) =>
+      mail.subjectContains('Welcome')
+    );
+
+    // Assert nothing else was sent
+    Mail.assertSentCount(WelcomeEmail, 1);
+  });
+});
+```
+
+No mocks. No interceptors. No SMTP server. Just `Mail.fake()` and assertions that read like plain English.
+
+---
+
+## Provider Failover
+
+Got two providers? Set up automatic failover:
+
+```typescript
+Mail.configure({
+  default: 'resend',
+  mailers: {
+    resend:   { driver: 'resend',   apiKey: process.env.RESEND_API_KEY },
+    sendgrid: { driver: 'sendgrid', apiKey: process.env.SENDGRID_API_KEY },
+  },
+  failover: ['resend', 'sendgrid'], // try resend first, fall back to sendgrid
+});
+```
+
+If Resend fails, laramail automatically retries with SendGrid. Your users get their email either way.
+
+---
+
+## Staging Redirect
+
+One of my favorite DX features. In staging, you never want to accidentally email real users. With `Mail.alwaysTo()`, every email gets redirected to a single address:
+
+```typescript
+if (process.env.NODE_ENV === 'staging') {
+  Mail.alwaysTo('dev@example.com');
+}
+```
+
+Every email your staging environment sends goes to `dev@example.com`. Regardless of what `Mail.to()` says. No accidental customer emails.
+
+---
+
+## What's Included
+
+- **6 providers:** SMTP, SendGrid, AWS SES, Mailgun, Resend, Postmark
+- **3 template engines:** Handlebars, EJS, Pug
+- **Markdown emails** with built-in components (buttons, panels, etc.)
+- **Queue support** via BullMQ
+- **Rate limiting** with sliding window, configurable per-mailer
+- **Email events** — hooks for sending, sent, and failed
+- **Email preview** via CLI
+- **Custom providers** via `Mail.extend()`
+- **TypeScript-first** — fully typed, no `@types/` needed
+- **620+ tests** with full coverage
+
+---
+
+## Get Started
+
+```bash
+npm install laramail
+```
+
+- [GitHub](https://github.com/impruthvi/laramail) — star it if this solves your problem
+- [Documentation](https://nodemail.impruthvi.me) — full API reference
+- [npm](https://www.npmjs.com/package/laramail)
+
+If you've been copy-pasting provider-specific email code across projects for years — I made this for you. If something doesn't work, open an issue. I read every one.
